@@ -1,0 +1,19 @@
+{
+  "name": "@steeplejack/core",
+  "version": "1.0.0",
+  "description": "The Steeplejack core objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steeplejack-js/core.git"
+  },
+  "author": "Simon Emms <simon@simonemms.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/steeplejack-js/core/issues"
+  },
+  "homepage": "https://github.com/steeplejack-js/core#readme"
+}
