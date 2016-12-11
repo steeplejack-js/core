@@ -21,35 +21,6 @@ import * as _ from "lodash";
 export class Base extends EventEmitter {
 
   /**
-   * __construct
-   *
-   * The ES5 constructor method. Anything found here
-   * will be executed as the constructor method.
-   */
-  protected __construct: Function; // tslint:disable-line:variable-name
-
-  /**
-   * Constructor
-   *
-   * Adds in a check for the _construct function,
-   * to be called if this class is created using
-   * the .extend() static method.
-   *
-   * @param {*} args
-   */
-  public constructor (...args: any[]) {
-
-    /* Call parent class */
-    super();
-
-    /* Call the ES5 constructor */
-    if (_.isFunction(this.__construct)) {
-      this.__construct(...args);
-    }
-
-  }
-
-  /**
    * Clone
    *
    * Clones the instance of the object, returning a

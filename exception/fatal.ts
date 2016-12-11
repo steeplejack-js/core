@@ -7,25 +7,17 @@
  * error (or equivalent).
  */
 
-"use strict";
-
-
 /* Node modules */
 
-
 /* Third-party modules */
-
 
 /* Files */
 import {Exception} from "./index";
 
-
 export class FatalException extends Exception {
 
-
-    public get type () {
-        return "FATAL";
-    }
-
+  public get type () {
+    return "FATAL";
+  }
 
 }
