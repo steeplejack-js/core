@@ -1,12 +1,9 @@
-# @todo https://medium.com/@nthgergo/publishing-gh-pages-with-travis-ci-53a8270e87db#.kwnowod8n
 language: node_js
 node_js:
-- 'node'
-- '5.11'
-- '4.4'
-- 'iojs'
-- '0.12'
-- '0.10'
+- '7'
+- '6'
+- '5'
+- '4'
 matrix:
   fast_finish: true
 sudo: false
@@ -20,11 +17,9 @@ before_install:
 - npm install -g grunt-cli
 - date
 script:
-# Use this rather than a postinstall - that runs even when this is a dependency
-- npm run typings
-- grunt ci
+- npm run ci
 before_deploy:
-- grunt
+- npm run compile
 deploy:
   provider: npm
   email: simon@simonemms.com
