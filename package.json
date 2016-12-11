@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -Rf **/*.d.ts **/*.js ./coverage ./tmp",
+    "ci": "npm test -s && npm run coverage -s",
     "compile": "tsc",
     "compile:all": "tsc --outDir ./tmp",
     "coverage": "cross-env NODE_ENV=test nyc npm run test:unit",
