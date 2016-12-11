@@ -29,7 +29,8 @@
       "**/*.ts"
     ],
     "exclude": [
-      "interfaces"
+      "interfaces",
+      "test"
     ],
     "extension": [
       ".ts"
