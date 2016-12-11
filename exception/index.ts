@@ -26,20 +26,11 @@ export abstract class Exception implements IException {
 
   public message: string;
 
+  public name: string;
+
   public stack: string;
 
   public type: string;
-
-  /**
-   * Name
-   *
-   * Polyfill for the Error.name parameter
-   *
-   * @returns {string}
-   */
-  get name (): string {
-    return (<any> this.constructor).name;
-  }
 
   /**
    * Constructor
