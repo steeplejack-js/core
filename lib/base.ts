@@ -17,30 +17,8 @@ import {data as datatypes, validation} from "datautils";
 import * as _ from "lodash";
 
 /* Files */
-import {extender} from "../helpers/extender";
 
 export class Base extends EventEmitter {
-
-  /**
-   * Extend
-   *
-   * Used for extending this class if using a
-   * preprocessor that doesn't have the
-   * "class Child extends Parent".
-   *
-   * If using a language that supports class
-   * extension (ES6/TypeScript/CoffeeScript)
-   * use that languages class extension rather
-   * than this method.  This should be seen
-   * as a polyfill rather than core functionality.
-   *
-   * @param {object} properties
-   * @param {object} staticProperties
-   * @returns {Function}
-   */
-  public static extend (properties: Object = {}, staticProperties: Object = {}): Function {
-    return extender(this, properties, staticProperties);
-  }
 
   /**
    * __construct

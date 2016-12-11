@@ -42,5 +42,3 @@ tmp
 **/*.d.ts
 **/*.js
 **/*.js.map
-!test/unit/helpers/extender.test.js
-!test/unit/lib/base.extend.test.js
