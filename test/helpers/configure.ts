@@ -25,7 +25,7 @@ let expect = chai.expect;
 proxyquire.noCallThru();
 
 export {
-    expect,
-    proxyquire,
-    sinon
+  expect,
+  proxyquire,
+  sinon
 };

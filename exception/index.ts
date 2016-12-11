@@ -7,9 +7,14 @@
  *
  * This is an abstract class and can't be instantiated
  * directly - it must be extended.
+ *
+ * The Error class is difficult to extend so the actual
+ * extension is a bit hacky, using the util.inherits
+ * method.
  */
 
 /* Node modules */
+import * as util from "util";
 
 /* Third-party modules */
 import * as _ from "lodash";
@@ -17,11 +22,24 @@ import * as _ from "lodash";
 /* Files */
 import {IException} from "../interfaces/exception";
 
-export abstract class Exception extends Error implements IException {
+export abstract class Exception implements IException {
 
-  public message: string = "UNKNOWN_ERROR";
+  public message: string;
+
+  public stack: string;
 
   public type: string;
+
+  /**
+   * Name
+   *
+   * Polyfill for the Error.name parameter
+   *
+   * @returns {string}
+   */
+  get name (): string {
+    return (<any> this.constructor).name;
+  }
 
   /**
    * Constructor
@@ -29,13 +47,12 @@ export abstract class Exception extends Error implements IException {
    * Ensures that the object is correctly
    * configured
    *
-   * @param {*} message
-   * @param {*} args
+   * @param {string} message
    */
-  public constructor (message: any = null, ...args: any[]) {
+  public constructor (message: any = "UNKNOWN_ERROR") {
 
     /* Call the parent class */
-    super();
+    Error.apply(this, arguments);
 
     /* Ensure the exception type is set */
     if (_.isEmpty(this.type)) {
@@ -88,3 +105,6 @@ export abstract class Exception extends Error implements IException {
   }
 
 }
+
+/* Extend the Error class */
+util.inherits(Exception, Error);
