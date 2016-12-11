@@ -50,6 +50,10 @@ describe("Exception test", function () {
         .instanceof(Exception)
         .instanceof(Error);
 
+      expect(obj.name).to.be.equal("Child");
+
+      expect(obj.message).to.be.equal("UNKNOWN_ERROR");
+
       expect(obj.type).to.be.equal("SOME_TYPE");
 
     });

@@ -71,9 +71,7 @@ export abstract class Exception implements IException {
     }
 
     /* Set the message */
-    if (_.isString(message)) {
-      this.message = message;
-    }
+    this.message = message;
 
   }
 
