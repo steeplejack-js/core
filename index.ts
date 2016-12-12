@@ -7,10 +7,10 @@
 /* Third-party modules */
 
 /* Files */
+import {Exception} from "./exception";
+import {FatalException} from "./exception/fatal";
+import {ValidationException} from "./exception/validation";
 import {Base} from "./lib/base";
-import {Exception} from "./lib/exception";
-import {FatalException} from "./lib/exception/fatal";
-import {ValidationException} from "./lib/exception/validation";
 
 export {
   Base,

@@ -7,8 +7,8 @@
 /* Third-party modules */
 
 /* Files */
-import {Exception} from "../../../../lib/exception/index";
-import {expect} from "../../../helpers/configure";
+import {Exception} from "../../../exception/index";
+import {expect} from "../../helpers/configure";
 
 describe("Exception test", function () {
 
