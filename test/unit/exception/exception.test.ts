@@ -3,7 +3,6 @@
  */
 
 /* Node modules */
-import * as path from "path";
 
 /* Third-party modules */
 
@@ -50,7 +49,7 @@ describe("Exception test", function () {
         .instanceof(Exception)
         .instanceof(Error);
 
-      expect(obj.name).to.be.a("string");
+      expect(obj.name).to.be.equal("Child");
 
       expect(obj.message).to.be.equal("UNKNOWN_ERROR");
 
@@ -88,7 +87,7 @@ describe("Exception test", function () {
       expect(obj.arg2).to.be.equal("arg2");
 
       expect(obj.stack).to.be.a("string")
-        .to.contain(path.join(process.cwd(), "exception", "index.ts"));
+        .to.contain("exception", "index.test.ts");
 
     });
 

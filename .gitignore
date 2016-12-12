@@ -42,3 +42,5 @@ tmp
 **/*.d.ts
 **/*.js
 **/*.js.map
+!exception/index.d.ts
+!exception/index.js
