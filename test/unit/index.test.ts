@@ -10,9 +10,9 @@
 import {expect} from "../helpers/configure";
 import * as core from "../../index";
 import {Base} from "../../lib/base";
-import {Exception} from "../../exception";
-import {FatalException} from "../../exception/fatal";
-import {ValidationException} from "../../exception/validation";
+import {Exception} from "../../lib/exception";
+import {FatalException} from "../../lib/exception/fatal";
+import {ValidationException} from "../../lib/exception/validation";
 
 describe("Index tests", function () {
 

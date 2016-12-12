@@ -10,9 +10,9 @@
 
 /* Files */
 
-import {ValidationException} from "../../../exception/validation";
-import {Exception} from "../../../exception";
-import {expect} from "../../helpers/configure";
+import {ValidationException} from "../../../../lib/exception/validation";
+import {Exception} from "../../../../lib/exception";
+import {expect} from "../../../helpers/configure";
 
 describe("ValidationException test", function () {
 

@@ -7,9 +7,9 @@
 /* Third-party modules */
 
 /* Files */
-import {FatalException} from "../../../exception/fatal";
-import {Exception} from "../../../exception/index";
-import {expect} from "../../helpers/configure";
+import {FatalException} from "../../../../lib/exception/fatal";
+import {Exception} from "../../../../lib/exception/index";
+import {expect} from "../../../helpers/configure";
 
 describe("FatalException test", () => {
 
