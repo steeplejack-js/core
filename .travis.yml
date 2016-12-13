@@ -26,10 +26,9 @@ before_deploy:
 - npm run compile
 
 deploy:
-  provider: npm
+  provider: script
   email: simon@simonemms.com
-  api_key:
-    secure: djTHcZ9aVcIBrUVh4Vz0JLTAMgPjb1uaokEz2kqMX6VSI3zWX9A4SmkZs+VKQ4GEtIqVV3gVcG5w7iqfXkwPpIg0Zt/XFerO16LrHA/z9JYOM0IHKQPvAL09QciebDgu42UcLlPq3+YCHeoMZ78Ns2t+UluR1MpPOt4G4hlqR98vxUrd0zOik8ziAbiIOsigVINkGMtJJXRCf2Ch/zQ+6K6NNdSxvp6I12pSHjpE49SnL4Ogx1onzwUOSU55A1vTiDqjjok22BUf11KyWDtDCZ5hfsI/5/fVtu1LEiMzKVqi4nZB48RGwlw+f372HWKb4V3Nvrp4/bSZO9PYwEwB/WMgGAdvRhfDd19yhMqW2tLB85J2zvy/bGK5dUJhl7RMiAUFELyObMucRm8PaVoPc8UWSli+ripBOYLyOevysYkOiBVMj6NyrkGKnCosiVaSIfOZAjOh5EBX5V4l2GeDb61E9GcQ4WZTsApm2WTXyHCW9DsSOpSDhbLOkIE3ggAxH7lVNciht3RxLWG60F48zIWFy9YJ/tQmI7Z0er6jX+a1iiWKym6Nj5f7J+t35bFhsO1gl4ZKWGgrg0AIwttkJtwACELfOpeGGzWSVU8j2I/mKts+DMMTNNmf6MjsJlrgPUJ97QDJTMbtAXxCE2bneitEIc2BoGa39YduR/r7BBY=
+  script: deploy.sh
   on:
     tags: true
     repo: steeplejack-js/core
