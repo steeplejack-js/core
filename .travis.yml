@@ -1,33 +1,39 @@
 language: node_js
+
 node_js:
 - '7'
 - '6'
 - '5'
 - '4'
+
 matrix:
   fast_finish: true
+
 sudo: false
+
 env:
   matrix:
   - TZ=Etc/UTC
   - TZ=America/Los_Angeles
-  global:
-    secure: Zh2Z8FyRQMFM5vez1OmIxVZ8s18K6qEzFa3C3g3XNYBxRQ4GzpSN8S3M0QjvnrrGi+XbMmdcV9DRYgOfGHqq55IamhLH9l5neTgPG3IqArRnWDLMulWRZrRznLACZCr1U0+z09WE+ndOCyfRWKNgkGaNdWRQhaQUZjEOevtqjvs=
+
 before_install:
 - date
+
 script:
 - npm run ci
+
 before_deploy:
 - npm run compile
+
 deploy:
   provider: npm
   email: simon@simonemms.com
   api_key:
-    secure: sjeE2VqUFprtBzZk+q0CnIDwhWaLpkpqCxbBUl70D5yTu29Vrw0pKdwpmDGyH3nC9JOauKtS9xIIB4r7dWK0ijFEmbdsZRjpE1pcjyX9kFIVvjiSyYmhNg6S7UWvyeLQtbElrYKJHC69U4/6Pebk/7pcZ6p469XwccvKCnludDc=
+    secure: djTHcZ9aVcIBrUVh4Vz0JLTAMgPjb1uaokEz2kqMX6VSI3zWX9A4SmkZs+VKQ4GEtIqVV3gVcG5w7iqfXkwPpIg0Zt/XFerO16LrHA/z9JYOM0IHKQPvAL09QciebDgu42UcLlPq3+YCHeoMZ78Ns2t+UluR1MpPOt4G4hlqR98vxUrd0zOik8ziAbiIOsigVINkGMtJJXRCf2Ch/zQ+6K6NNdSxvp6I12pSHjpE49SnL4Ogx1onzwUOSU55A1vTiDqjjok22BUf11KyWDtDCZ5hfsI/5/fVtu1LEiMzKVqi4nZB48RGwlw+f372HWKb4V3Nvrp4/bSZO9PYwEwB/WMgGAdvRhfDd19yhMqW2tLB85J2zvy/bGK5dUJhl7RMiAUFELyObMucRm8PaVoPc8UWSli+ripBOYLyOevysYkOiBVMj6NyrkGKnCosiVaSIfOZAjOh5EBX5V4l2GeDb61E9GcQ4WZTsApm2WTXyHCW9DsSOpSDhbLOkIE3ggAxH7lVNciht3RxLWG60F48zIWFy9YJ/tQmI7Z0er6jX+a1iiWKym6Nj5f7J+t35bFhsO1gl4ZKWGgrg0AIwttkJtwACELfOpeGGzWSVU8j2I/mKts+DMMTNNmf6MjsJlrgPUJ97QDJTMbtAXxCE2bneitEIc2BoGa39YduR/r7BBY=
   on:
-    all_branches: true
     tags: true
-    repo: riggerthegeek/steeplejack
+    repo: steeplejack-js/core
+
 notifications:
   webhooks:
     urls:
