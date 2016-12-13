@@ -1,6 +1,6 @@
 {
   "name": "@steeplejack/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The Steeplejack core objects",
   "main": "index.js",
   "scripts": {
