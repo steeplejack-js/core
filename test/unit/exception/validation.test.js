@@ -9,10 +9,9 @@
 /* Third-party modules */
 
 /* Files */
-
-import {ValidationException} from "../../../exception/validation";
-import {Exception} from "../../../exception";
-import {expect} from "../../helpers/configure";
+const ValidationException = require('../../../src/exception/validation');
+const Exception = require('../../../src/exception');
+const {expect} = require('../../helpers/configure');
 
 describe("ValidationException test", function () {
 
@@ -57,7 +56,7 @@ describe("ValidationException test", function () {
 
     describe("#addError", function () {
 
-      var obj: any;
+      var obj;
       beforeEach(function () {
         obj = new ValidationException();
       });
@@ -192,7 +191,7 @@ describe("ValidationException test", function () {
 
     describe("#getErrors", function () {
 
-      var obj: any;
+      var obj;
       beforeEach(function () {
         obj = new ValidationException();
       });

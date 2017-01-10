@@ -8,15 +8,15 @@
  */
 
 /* Node modules */
-import {EventEmitter} from "events";
+const EventEmitter = require('events').EventEmitter;
 
 /* Third-party modules */
-import {data as datatypes, validation} from "datautils";
-import * as _ from "lodash";
+const datautils = require('datautils');
+const _ = require('lodash');
 
 /* Files */
 
-export class Base extends EventEmitter {
+module.exports = class Base extends EventEmitter {
 
   /**
    * Clone
@@ -26,16 +26,14 @@ export class Base extends EventEmitter {
    *
    * @returns {Object}
    */
-  public clone (): any {
-
+  clone () {
     const prototype = Object.getPrototypeOf(this);
 
     const clonedObj = Object.create(prototype);
 
     Object.getOwnPropertyNames(this)
-      .map((name) => {
-
-        const obj = _.clone((<any> this)[name]);
+      .forEach((name) => {
+        const obj = _.clone(this[name]);
 
         Object.defineProperty(clonedObj, name, {
           configurable: true,
@@ -43,11 +41,9 @@ export class Base extends EventEmitter {
           value: obj,
           writable: true,
         });
-
       });
 
     return clonedObj;
-
   }
 
   /**
@@ -56,10 +52,10 @@ export class Base extends EventEmitter {
    * Returns the data parameter from the
    * datautils package
    *
-   * @returns {"datautils".data}
+   * @return {datautils.data}
    */
-  public static get datatypes () {
-    return datatypes;
+  static get datatypes () {
+    return datautils.data;
   }
 
   /**
@@ -68,10 +64,10 @@ export class Base extends EventEmitter {
    * Returns the validation parameter from
    * datautils package
    *
-   * @returns {datautils.validation}
+   * @return {datautils.validation}
    */
-  public static get validation () {
-    return validation;
+  static get validation () {
+    return datautils.validation;
   }
 
-}
+};

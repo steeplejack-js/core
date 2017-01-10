@@ -12,12 +12,12 @@
 /* Third-party modules */
 
 /* Files */
-import {Exception} from "./index";
+const Exception = require('./index');
 
-export class FatalException extends Exception {
+module.exports = class FatalException extends Exception {
 
-  public get type () {
-    return "FATAL";
+  get type () {
+    return 'FATAL';
   }
 
-}
+};

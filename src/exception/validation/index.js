@@ -9,21 +9,16 @@
 /* Node modules */
 
 /* Third-party modules */
-import * as _ from "lodash";
+const _ = require('lodash');
 
 /* Files */
-import {Detail} from "./detail";
-import {Exception} from "../index";
-import {IValidationExceptionDetail} from "../../interfaces/validationExceptionDetail";
+const Detail = require('./detail');
+const Exception = require('../index');
 
-export class ValidationException extends Exception {
+module.exports = class ValidationException extends Exception {
 
-  public errors: {
-    [key: string]: Detail[];
-  } = {};
-
-  public get type () {
-    return "VALIDATION";
+  get type () {
+    return 'VALIDATION';
   }
 
   /**
@@ -37,15 +32,14 @@ export class ValidationException extends Exception {
    * @param {*} additional
    * @returns {ValidationException}
    */
-  public addError (key: string, value: any, message: string, additional: any = void 0) : ValidationException {
-
+  addError (key, value, message, additional = undefined) {
     /* If key not set, throw error */
     if (_.isEmpty(key)) {
-      throw new SyntaxError("KEY_MUST_BE_SET");
+      throw new SyntaxError('KEY_MUST_BE_SET');
     }
 
     /* Create the error detail object */
-    let err = Detail.toModel(value, message, additional);
+    const err = Detail.toModel(value, message, additional);
 
     /* Validate the error and tell the developer if done incorrectly */
     err.validate();
@@ -59,7 +53,6 @@ export class ValidationException extends Exception {
     this.errors[key].push(err);
 
     return this;
-
   }
 
   /**
@@ -70,22 +63,18 @@ export class ValidationException extends Exception {
    *
    * @returns {TResult}
    */
-  public getErrors () : any {
-
+  getErrors () {
     return _.reduce(this.errors, (result, errors, key) => {
+      const element = [];
 
-      let element: IValidationExceptionDetail[] = [];
-
-      _.each(errors, err => {
+      _.each(errors, (err) => {
         element.push(err.toDTO());
       });
 
-      (<any> result)[key] = element;
+      result[key] = element;
 
       return result;
-
     }, {});
-
   }
 
   /**
@@ -95,8 +84,8 @@ export class ValidationException extends Exception {
    *
    * @returns {boolean}
    */
-  public hasErrors () : boolean {
+  hasErrors () {
     return _.isEmpty(this.errors) === false;
   }
 
-}
+};

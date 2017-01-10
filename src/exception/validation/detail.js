@@ -7,24 +7,16 @@
 /* Node modules */
 
 /* Third-party modules */
-import * as _ from "lodash";
+const _ = require('lodash');
 
 /* Files */
 
-export class Detail {
+module.exports = class Detail {
 
-  public additional: any;
-
-  public message: string;
-
-  public value: any;
-
-  public constructor ({message, value, additional}: { message: string, value: any, additional: any }) {
-
+  constructor ({ message, value, additional }) {
     this.message = message;
     this.value = value;
     this.additional = additional;
-
   }
 
   /**
@@ -35,13 +27,10 @@ export class Detail {
    *
    * @returns {object}
    */
-  public toDTO () {
-
-    let obj: any;
-
-    obj = _.pick(this, [
-      "message",
-      "value"
+  toDTO () {
+    const obj = _.pick(this, [
+      'message',
+      'value',
     ]);
 
     /* Add the optional additional tag */
@@ -50,7 +39,6 @@ export class Detail {
     }
 
     return obj;
-
   }
 
   /**
@@ -61,14 +49,12 @@ export class Detail {
    *
    * @returns {boolean}
    */
-  public validate () : boolean {
-
+  validate () {
     if (_.isEmpty(this.message)) {
-      throw new SyntaxError("MESSAGE_MUST_BE_SET");
+      throw new SyntaxError('MESSAGE_MUST_BE_SET');
     }
 
     return true;
-
   }
 
   /**
@@ -82,14 +68,12 @@ export class Detail {
    * @param {*} additional
    * @returns {Detail}
    */
-  public static toModel (value: any, message: string, additional: any = void 0) : Detail {
-
+  static toModel (value, message, additional = undefined) {
     return new Detail({
       value,
       message,
-      additional
+      additional,
     });
-
   }
 
-}
+};

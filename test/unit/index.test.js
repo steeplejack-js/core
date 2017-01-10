@@ -7,12 +7,12 @@
 /* Third-party modules */
 
 /* Files */
-import {expect} from "../helpers/configure";
-import * as core from "../../index";
-import {Base} from "../../lib/base";
-import {Exception} from "../../exception";
-import {FatalException} from "../../exception/fatal";
-import {ValidationException} from "../../exception/validation";
+const {expect} = require('../helpers/configure');
+const core = require('../../src/index');
+const Base = require('../../src/lib/base');
+const Exception = require('../../src/exception');
+const FatalException = require('../../src/exception/fatal');
+const ValidationException = require('../../src/exception/validation');
 
 describe("Index tests", function () {
 

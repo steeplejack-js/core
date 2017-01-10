@@ -7,8 +7,8 @@
 /* Third-party modules */
 
 /* Files */
-import {Exception} from "../../../exception/index";
-import {expect} from "../../helpers/configure";
+const Exception = require('../../../src/exception');
+const {expect} = require('../../helpers/configure');
 
 describe("Exception test", function () {
 
@@ -65,11 +65,7 @@ describe("Exception test", function () {
           return "type";
         }
 
-        arg1: string;
-
-        arg2: string;
-
-        constructor (message: any, ...args: any[]) {
+        constructor (message, ...args) {
 
           super(message);
 
@@ -163,7 +159,7 @@ describe("Exception test", function () {
             return "MyErr";
           }
 
-          public getDetail () {
+          getDetail () {
             return this.message;
           }
 
@@ -203,7 +199,7 @@ describe("Exception test", function () {
             return "MyErr";
           }
 
-          public getHttpCode () {
+          getHttpCode () {
             return 403;
           }
 

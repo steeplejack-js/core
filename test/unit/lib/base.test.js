@@ -3,14 +3,17 @@
  */
 
 /* Node modules */
-import {EventEmitter} from "events";
+const EventEmitter = require('events').EventEmitter;
 
 /* Third-party modules */
-import {data as datatypes, validation} from "datautils";
+const datautils = require('datautils');
 
 /* Files */
-import {Base} from "../../../lib/base";
-import {expect} from "../../helpers/configure";
+const Base = require('../../../src/lib/base');
+const {expect} = require('../../helpers/configure');
+
+const datatypes = datautils.data;
+const validation = datautils.validation;
 
 describe("Base class", function () {
 
@@ -34,13 +37,11 @@ describe("Base class", function () {
 
         class Model extends Base {
 
-          values: any;
-
           get constant () {
             return 23;
           }
 
-          constructor (obj: any) {
+          constructor (obj) {
             super();
 
             this.values = {};
@@ -58,7 +59,7 @@ describe("Base class", function () {
             return this.values;
           }
 
-          setValue (key: any, value: any) {
+          setValue (key, value) {
             this.values[key] = value;
             return true;
           }

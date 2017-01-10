@@ -7,9 +7,9 @@
 /* Third-party modules */
 
 /* Files */
-import {FatalException} from "../../../exception/fatal";
-import {Exception} from "../../../exception/index";
-import {expect} from "../../helpers/configure";
+const FatalException = require('../../../src/exception/fatal');
+const Exception = require('../../../src/exception');
+const {expect} = require('../../helpers/configure');
 
 describe("FatalException test", () => {
 
