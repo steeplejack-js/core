@@ -3,18 +3,33 @@
   "version": "0.0.2",
   "description": "The Steeplejack core objects",
   "main": "index.js",
+  "nyc": {
+    "all": true,
+    "check-coverage": true,
+    "cache": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
   "scripts": {
     "clean": "rm -Rf ./coverage",
     "ci": "npm test -s && npm run coverage -s",
-    "coverage": "istanbul cover _mocha ./tmp/test/unit/ -- --recursive ./tmp/test/unit",
+    "coverage": "nyc npm run test:unit",
     "postversion": "git push --tags && git push",
     "test": "npm run test:lint -s && npm run test:unit -s",
     "test:lint": "eslint src",
     "test:unit": "mocha --throw-deprecation --ui bdd --full-trace --recursive test/unit",
-    "watch:coverage": "nodemon --ext js,ts --exec 'npm run coverage -s' --legacy-watch",
-    "watch:test": "nodemon --ext js,ts --exec 'npm run test -s' --legacy-watch",
-    "watch:test:lint": "nodemon --ext js,ts --exec 'npm run test:lint -s' --legacy-watch",
-    "watch:test:unit": "nodemon --ext js,ts --exec 'npm run test:unit -s' --legacy-watch"
+    "watch:coverage": "nodemon --exec 'npm run coverage -s' --legacy-watch",
+    "watch:test": "nodemon --exec 'npm run test -s' --legacy-watch",
+    "watch:test:lint": "nodemon --exec 'npm run test:lint -s' --legacy-watch",
+    "watch:test:unit": "nodemon --exec 'npm run test:unit -s' --legacy-watch"
   },
   "repository": {
     "type": "git",
@@ -41,6 +56,7 @@
     "eslint-plugin-react": "^6.9.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
+    "nyc": "^10.0.0",
     "proxyquire": "^1.7.10",
     "sinon": "^1.17.7",
     "sinon-as-promised": "^4.0.2",
