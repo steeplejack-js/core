@@ -10,31 +10,25 @@ const datautils = require('datautils');
 
 /* Files */
 const Base = require('../../../src/lib/base');
-const {expect} = require('../../helpers/configure');
+const { expect } = require('../../helpers/configure');
 
 const datatypes = datautils.data;
 const validation = datautils.validation;
 
-describe("Base class", function () {
+describe('Base class', () => {
+  describe('Methods', () => {
+    describe('#clone', () => {
+      it('should clone the Base method and remain an instance', () => {
+        const obj = new Base();
 
-  describe("Methods", function () {
-
-    describe("#clone", function () {
-
-      it("should clone the Base method and remain an instance", () => {
-
-        let obj = new Base();
-
-        let clone = obj.clone();
+        const clone = obj.clone();
 
         expect(clone).to.be.an.instanceof(Base)
           .to.be.an.instanceof(EventEmitter)
           .to.not.be.equal(obj);
-
       });
 
-      it("should clone an extended Base method and remain an instance", () => {
-
+      it('should clone an extended Base method and remain an instance', () => {
         class Model extends Base {
 
           get constant () {
@@ -46,13 +40,13 @@ describe("Base class", function () {
 
             this.values = {};
 
-            for (var key in obj) {
+            for (const key in obj) {
               this.setValue(key, obj[key]);
             }
           }
 
           _hidden () {
-            return "hello";
+            return 'hello';
           }
 
           getValues () {
@@ -66,11 +60,11 @@ describe("Base class", function () {
 
         }
 
-        var obj = new Model({
-          key1: "val1"
+        const obj = new Model({
+          key1: 'val1',
         });
 
-        var clone = obj.clone();
+        const clone = obj.clone();
 
         expect(clone).to.be.an.instanceof(Model)
           .to.be.an.instanceof(Base)
@@ -79,7 +73,7 @@ describe("Base class", function () {
 
         expect(clone.constant).to.be.equal(23);
         expect(clone.values).to.be.eql({
-          key1: "val1"
+          key1: 'val1',
         });
         expect(clone.values).to.be.eql(obj.values)
           .to.not.be.equal(obj.values);
@@ -89,46 +83,32 @@ describe("Base class", function () {
         expect(clone._hidden).to.be.equal(obj._hidden);
         expect(clone._hidden()).to.be.equal(obj._hidden());
 
-        clone.setValue("key2", "val2");
+        clone.setValue('key2', 'val2');
         expect(obj.values).to.be.eql({
-          key1: "val1"
+          key1: 'val1',
         });
         expect(clone.values).to.be.eql({
-          key1: "val1",
-          key2: "val2"
+          key1: 'val1',
+          key2: 'val2',
         });
 
         /* Changing the values entirely now */
         expect(clone.getValues()).to.not.be.eql(obj.getValues());
-
       });
-
     });
-
   });
 
-  describe("Static methods", function () {
-
-    describe("datatypes", function () {
-
-      it("should expose the datautils.data object", function () {
-
+  describe('Static methods', () => {
+    describe('datatypes', () => {
+      it('should expose the datautils.data object', () => {
         expect(Base.datatypes).to.be.equal(datatypes);
-
       });
-
     });
 
-    describe("validation", function () {
-
-      it("should expose the datautils.validation object", function () {
-
+    describe('validation', () => {
+      it('should expose the datautils.validation object', () => {
         expect(Base.validation).to.be.equal(validation);
-
       });
-
     });
-
   });
-
 });

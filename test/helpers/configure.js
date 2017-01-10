@@ -26,5 +26,5 @@ proxyquire.noCallThru();
 module.exports = {
   expect,
   proxyquire,
-  sinon
+  sinon,
 };

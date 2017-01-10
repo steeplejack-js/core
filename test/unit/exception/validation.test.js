@@ -2,7 +2,6 @@
  * validation.test
  */
 
-"use strict";
 
 /* Node modules */
 
@@ -11,199 +10,173 @@
 /* Files */
 const ValidationException = require('../../../src/exception/validation');
 const Exception = require('../../../src/exception');
-const {expect} = require('../../helpers/configure');
+const { expect } = require('../../helpers/configure');
 
-describe("ValidationException test", function () {
-
-  describe("Instantiation tests", function () {
-
-    it("should extend the Exception and Error classes", function () {
-
-      let obj = new ValidationException("message");
+describe('ValidationException test', () => {
+  describe('Instantiation tests', () => {
+    it('should extend the Exception and Error classes', () => {
+      const obj = new ValidationException('message');
 
       expect(obj).to.be.instanceof(ValidationException)
         .instanceof(Exception)
         .instanceof(Error);
 
-      expect(obj.type).to.be.equal("VALIDATION");
-      expect(obj.message).to.be.equal("message");
-      expect(obj.stack).to.be.a("string").to.have.length.above(0);
+      expect(obj.type).to.be.equal('VALIDATION');
+      expect(obj.message).to.be.equal('message');
+      expect(obj.stack).to.be.a('string').to.have.length.above(0);
 
       expect(obj.getErrors()).to.be.eql({});
       expect(obj.hasErrors()).to.be.false;
 
-      expect(obj.addError).to.be.a("function");
-
+      expect(obj.addError).to.be.a('function');
     });
 
-    it("should use default detail message", function () {
-
-      let obj = new ValidationException();
+    it('should use default detail message', () => {
+      const obj = new ValidationException();
 
       expect(obj).to.be.instanceof(ValidationException)
         .instanceof(Exception)
         .instanceof(Error);
 
-      expect(obj.type).to.be.equal("VALIDATION");
-      expect(obj.message).to.be.equal("UNKNOWN_ERROR");
-      expect(obj.stack).to.be.a("string").to.have.length.above(0);
-
+      expect(obj.type).to.be.equal('VALIDATION');
+      expect(obj.message).to.be.equal('UNKNOWN_ERROR');
+      expect(obj.stack).to.be.a('string').to.have.length.above(0);
     });
-
   });
 
-  describe("Methods", function () {
-
-    describe("#addError", function () {
-
-      var obj;
-      beforeEach(function () {
+  describe('Methods', () => {
+    describe('#addError', () => {
+      let obj;
+      beforeEach(() => {
         obj = new ValidationException();
       });
 
-      it("should add an error with key, value and message", function () {
-
+      it('should add an error with key, value and message', () => {
         expect(obj.hasErrors()).to.be.false;
 
-        obj.addError("key", "value", "message");
+        obj.addError('key', 'value', 'message');
 
         expect(obj.hasErrors()).to.be.true;
         expect(obj.getErrors()).to.be.eql({
           key: [{
-            message: "message",
-            value: "value"
-          }]
+            message: 'message',
+            value: 'value',
+          }],
         });
-
       });
 
-      it("should add additional information", function () {
-
+      it('should add additional information', () => {
         expect(obj.hasErrors()).to.be.false;
 
-        obj.addError("key", "value", "message", "string");
-        obj.addError("key", "value", "message", {object: null});
-        obj.addError("key2", "value", "message", ["array", null, {object: null}]);
+        obj.addError('key', 'value', 'message', 'string');
+        obj.addError('key', 'value', 'message', { object: null });
+        obj.addError('key2', 'value', 'message', ['array', null, { object: null }]);
 
         expect(obj.hasErrors()).to.be.true;
         expect(obj.getErrors()).to.be.eql({
           key: [{
-            message: "message",
-            value: "value",
-            additional: "string"
+            message: 'message',
+            value: 'value',
+            additional: 'string',
           },
-            {
-              message: "message",
-              value: "value",
-              additional: {
-                object: null
-              }
-            }],
+          {
+            message: 'message',
+            value: 'value',
+            additional: {
+              object: null,
+            },
+          }],
           key2: [{
-            message: "message",
-            value: "value",
+            message: 'message',
+            value: 'value',
             additional: [
-              "array", null,
+              'array', null,
               {
-                object: null
-              }
-            ]
-          }]
+                object: null,
+              },
+            ],
+          }],
         });
-
       });
 
-      it("should allow falsey values", function () {
-
+      it('should allow falsey values', () => {
         expect(obj.hasErrors()).to.be.false;
 
-        obj.addError("key", null, "message");
-        obj.addError("key", false, "message", null);
-        obj.addError("key2", undefined, "message");
-        obj.addError("key", 0, "message");
+        obj.addError('key', null, 'message');
+        obj.addError('key', false, 'message', null);
+        obj.addError('key2', undefined, 'message');
+        obj.addError('key', 0, 'message');
 
         expect(obj.hasErrors()).to.be.true;
         expect(obj.getErrors()).to.be.eql({
           key: [
             {
-              message: "message",
-              value: null
+              message: 'message',
+              value: null,
             },
             {
-              message: "message",
+              message: 'message',
               value: false,
-              additional: null
+              additional: null,
             },
             {
-              message: "message",
-              value: 0
-            }
+              message: 'message',
+              value: 0,
+            },
           ],
           key2: [
             {
-              message: "message",
-              value: undefined
-            }
-          ]
+              message: 'message',
+              value: undefined,
+            },
+          ],
         });
-
       });
 
-      it("should throw an error if key not set", function () {
-
-        var fail = false;
+      it('should throw an error if key not set', () => {
+        let fail = false;
 
         expect(obj.hasErrors()).to.be.false;
 
         try {
-          obj.addError(null, null, "message");
+          obj.addError(null, null, 'message');
         } catch (err) {
           fail = true;
 
           expect(err).to.be.instanceof(SyntaxError);
-          expect(err.message).to.be.equal("KEY_MUST_BE_SET");
+          expect(err.message).to.be.equal('KEY_MUST_BE_SET');
         }
 
         expect(fail).to.be.true;
-
       });
 
-      it("should throw an error if message not set", function () {
-
-        var fail = false;
+      it('should throw an error if message not set', () => {
+        let fail = false;
 
         expect(obj.hasErrors()).to.be.false;
 
         try {
-          obj.addError("key", null, null);
+          obj.addError('key', null, null);
         } catch (err) {
           fail = true;
 
           expect(err).to.be.instanceof(SyntaxError);
-          expect(err.message).to.be.equal("MESSAGE_MUST_BE_SET");
+          expect(err.message).to.be.equal('MESSAGE_MUST_BE_SET');
         }
 
         expect(fail).to.be.true;
-
       });
-
     });
 
-    describe("#getErrors", function () {
-
-      var obj;
-      beforeEach(function () {
+    describe('#getErrors', () => {
+      let obj;
+      beforeEach(() => {
         obj = new ValidationException();
       });
 
-      it("should return empty array when no errors", function () {
-
+      it('should return empty array when no errors', () => {
         expect(obj.getErrors()).to.be.eql({});
-
       });
-
     });
-
   });
-
 });
