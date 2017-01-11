@@ -22,18 +22,39 @@ const _ = require('lodash');
 
 /* Files */
 
-module.exports = class Exception extends Error {
+/**
+ * Extends
+ *
+ * Standard extender function taken from
+ * Babel/TypeScript compiler.
+ *
+ * @type {*}
+ * @private
+ */
+const __extends = function (d, b) {
+  for (const p in b) {
+    if (b.hasOwnProperty(p)) d[p] = b[p];
+  }
+  function __() {
+    this.constructor = d;
+  }
+  d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 
-  constructor (message) {
-    super(message);
+const Exception = function (_super) {
+  __extends(Exception, _super);
 
-    if (message === undefined) {
-      message = 'UNKNOWN_ERROR';
+  function Exception(message) {
+    if (message === void 0) {
+      message = "UNKNOWN_ERROR";
     }
+
+    /* Call the parent class */
+    _super.call(this);
 
     /* Ensure the exception type is set */
     if (_.isEmpty(this.type)) {
-      throw new SyntaxError('Exception type must be set');
+      throw new SyntaxError("Exception type must be set");
     }
 
     /* Set the name */
@@ -42,7 +63,7 @@ module.exports = class Exception extends Error {
     this.errors = {};
 
     /* Build the error stack */
-    if (_.isObject(message) && _.has(message, 'stack') && _.has(message, 'message')) {
+    if (_.isObject(message) && _.has(message, "stack") && _.has(message, "message")) {
       /* Use the given Error's message/stack */
       this.message = message.message;
       this.stack = message.stack;
@@ -61,12 +82,12 @@ module.exports = class Exception extends Error {
    *
    * @returns {{type: string, message: string}}
    */
-  getDetail () {
+  Exception.prototype.getDetail = function () {
     return {
       type: this.type,
-      message: this.message,
+      message: this.message
     };
-  }
+  };
 
   /**
    * Get HTTP Code
@@ -76,8 +97,11 @@ module.exports = class Exception extends Error {
    *
    * @returns {number}
    */
-  getHttpCode () {
+  Exception.prototype.getHttpCode = function () {
     return 500;
-  }
+  };
 
-};
+  return Exception;
+}(Error);
+
+module.exports = Exception;
