@@ -7,6 +7,6 @@
 /* Third-party modules */
 
 /* Files */
-const Validation = require('./validation/index');
+import Validation from './validation/index';
 
 module.exports = Validation;

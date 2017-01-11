@@ -9,11 +9,11 @@
 /* Node modules */
 
 /* Third-party modules */
-const _ = require('lodash');
+import { _ } from 'lodash';
 
 /* Files */
-const Detail = require('./detail');
-const Exception = require('../index');
+import Detail from './detail';
+import Exception from '../index';
 
 module.exports = class ValidationException extends Exception {
 

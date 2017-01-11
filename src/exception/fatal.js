@@ -12,7 +12,7 @@
 /* Third-party modules */
 
 /* Files */
-const Exception = require('./index');
+import Exception from './index';
 
 module.exports = class FatalException extends Exception {
 

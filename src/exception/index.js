@@ -17,7 +17,7 @@
 /* Node modules */
 
 /* Third-party modules */
-const _ = require('lodash');
+import { _ } from 'lodash';
 
 /* Files */
 

@@ -7,10 +7,10 @@
 /* Third-party modules */
 
 /* Files */
-const Exception = require('./exception');
-const FatalException = require('./exception/fatal');
-const ValidationException = require('./exception/validation');
-const Base = require('./lib/base');
+import Exception from './exception';
+import FatalException from './exception/fatal';
+import ValidationException from './exception/validation';
+import Base from './lib/base';
 
 module.exports = {
   Base,

@@ -8,11 +8,11 @@
  */
 
 /* Node modules */
-const EventEmitter = require('events').EventEmitter;
+import { EventEmitter } from 'events';
 
 /* Third-party modules */
-const datautils = require('datautils');
-const _ = require('lodash');
+import { _ } from 'lodash';
+import datautils from 'datautils';
 
 /* Files */
 
