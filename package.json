@@ -3,10 +3,32 @@
   "version": "0.0.2",
   "description": "The Steeplejack core objects",
   "main": "index.js",
+  "nyc": {
+    "all": true,
+    "check-coverage": true,
+    "cache": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "include": [
+      "src/*.js",
+      "src/**/*.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
   "scripts": {
     "clean": "rm -Rf ./coverage",
     "ci": "npm test -s && npm run coverage -s",
-    "coverage": "istanbul cover _mocha ./test/unit/ -- --recursive ./test/unit && istanbul check-coverage --statements=100 --branches=100 --functions=100 --lines=100",
+    "coverage": "cross-env NODE_ENV=test nyc mocha --ui bdd --recursive test/unit",
     "postversion": "git push --tags && git push",
     "test": "npm run test:lint -s && npm run test:unit -s",
     "test:lint": "eslint src",
@@ -33,19 +55,21 @@
     "lodash": "^4.17.2"
   },
   "devDependencies": {
+    "babel-plugin-istanbul": "^3.1.2",
     "babel-preset-env": "^1.1.8",
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
+    "cross-env": "^3.1.4",
     "eslint": "^3.13.1",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-plugin-classes": "^0.1.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
-    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
+    "nyc": "^10.0.0",
     "proxyquire": "^1.7.10",
     "sinon": "^1.17.7",
     "sinon-as-promised": "^4.0.2",

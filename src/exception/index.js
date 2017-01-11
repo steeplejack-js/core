@@ -32,6 +32,7 @@ import { _ } from 'lodash';
  */
 function extender (d, b) {
   _.each(b, (p) => {
+    /* istanbul ignore if */
     if (Object.prototype.hasOwnProperty.call(b, p)) {
       d[p] = b[p];
     }
@@ -40,6 +41,8 @@ function extender (d, b) {
   function Factory () {
     this.constructor = d;
   }
+
+  /* istanbul ignore next */
   d.prototype = b === null ? Object.create(b) : (Factory.prototype = b.prototype, new Factory());
 }
 
