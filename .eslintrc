@@ -19,9 +19,6 @@
     ],
     "no-param-reassign": [
       0
-    ],
-    "strict": [
-      0
     ]
   },
   "plugins": [
