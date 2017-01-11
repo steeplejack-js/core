@@ -26,8 +26,11 @@
     "instrument": false
   },
   "scripts": {
-    "clean": "rm -Rf ./coverage",
-    "ci": "npm test -s && npm run coverage -s",
+    "clean": "rm -Rf ./build ./coverage",
+    "ci": "npm test -s && npm run coverage -s && npm run compile -s",
+    "compile": "npm run clean && npm run compile:js -s && npm run copy",
+    "compile:js": "babel --source-maps=inline --out-dir ./build ./src",
+    "copy": "cp package.json build; cp LICENSE build; cp README.md build",
     "coverage": "cross-env NODE_ENV=test nyc mocha --ui bdd --recursive test/unit",
     "postversion": "git push --tags && git push",
     "test": "npm run test:lint -s && npm run test:unit -s",
@@ -55,6 +58,7 @@
     "lodash": "^4.17.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-plugin-istanbul": "^3.1.2",
     "babel-preset-env": "^1.1.8",
     "babel-register": "^6.18.0",
