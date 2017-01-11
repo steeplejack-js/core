@@ -17,7 +17,6 @@
 /* Node modules */
 
 /* Third-party modules */
-
 const _ = require('lodash');
 
 /* Files */
@@ -31,22 +30,23 @@ const _ = require('lodash');
  * @type {*}
  * @private
  */
-const __extends = function (d, b) {
-  for (const p in b) {
-    if (b.hasOwnProperty(p)) d[p] = b[p];
-  }
-  function __() {
+function extender (d, b) {
+  _.each(b, (p) => {
+    if (Object.prototype.hasOwnProperty.call(b, p)) {
+      d[p] = b[p];
+    }
+  });
+
+  function Factory () {
     this.constructor = d;
   }
-  d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+  d.prototype = b === null ? Object.create(b) : (Factory.prototype = b.prototype, new Factory());
+}
 
-const Exception = function (_super) {
-  __extends(Exception, _super);
-
-  function Exception(message) {
-    if (message === void 0) {
-      message = "UNKNOWN_ERROR";
+module.exports = (function iife (_super) {
+  function Exception (message) {
+    if (message === undefined) {
+      message = 'UNKNOWN_ERROR';
     }
 
     /* Call the parent class */
@@ -54,7 +54,7 @@ const Exception = function (_super) {
 
     /* Ensure the exception type is set */
     if (_.isEmpty(this.type)) {
-      throw new SyntaxError("Exception type must be set");
+      throw new SyntaxError('Exception type must be set');
     }
 
     /* Set the name */
@@ -63,7 +63,7 @@ const Exception = function (_super) {
     this.errors = {};
 
     /* Build the error stack */
-    if (_.isObject(message) && _.has(message, "stack") && _.has(message, "message")) {
+    if (_.isObject(message) && _.has(message, 'stack') && _.has(message, 'message')) {
       /* Use the given Error's message/stack */
       this.message = message.message;
       this.stack = message.stack;
@@ -74,6 +74,8 @@ const Exception = function (_super) {
     }
   }
 
+  extender(Exception, _super);
+
   /**
    * Get Detail
    *
@@ -82,10 +84,10 @@ const Exception = function (_super) {
    *
    * @returns {{type: string, message: string}}
    */
-  Exception.prototype.getDetail = function () {
+  Exception.prototype.getDetail = function getDetail () {
     return {
       type: this.type,
-      message: this.message
+      message: this.message,
     };
   };
 
@@ -97,11 +99,9 @@ const Exception = function (_super) {
    *
    * @returns {number}
    */
-  Exception.prototype.getHttpCode = function () {
+  Exception.prototype.getHttpCode = function getHttpCode () {
     return 500;
   };
 
   return Exception;
-}(Error);
-
-module.exports = Exception;
+}(Error));
