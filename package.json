@@ -39,9 +39,7 @@
     "watch:coverage": "nodemon --exec 'npm run coverage -s' --legacy-watch",
     "watch:test": "nodemon --exec 'npm run test -s' --legacy-watch",
     "watch:test:lint": "nodemon --exec 'npm run test:lint -s' --legacy-watch",
-    "watch:test:unit": "nodemon --exec 'npm run test:unit -s' --legacy-watch",
-    "scoverage": "npm run compile:all -s && npm run coverage:report -s",
-    "scoverage:report": "istanbul cover _mocha ./tmp/test/unit/ -- --recursive ./tmp/test/unit"
+    "watch:test:unit": "nodemon --exec 'npm run test:unit -s' --legacy-watch"
   },
   "repository": {
     "type": "git",
